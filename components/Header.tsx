@@ -14,6 +14,10 @@ const links: {
     label: "Work",
   },
   {
+    href: "/photos",
+    label: "Photos",
+  },
+  {
     href: "/about",
     label: "About",
   },

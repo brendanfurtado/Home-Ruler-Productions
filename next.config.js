@@ -23,6 +23,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'img.youtube.com',
       },
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+      },
     ],
   },
   webpack: (config, { webpack, isServer }) => {
