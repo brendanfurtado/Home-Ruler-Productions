@@ -42,7 +42,7 @@ export default function ContactPage() {
               </h2>
               <div className="flex justify-center gap-6">
                 <a
-                  href="https://www.youtube.com/@CanBlueHockeyPodcast"
+                  href="https://www.youtube.com/@HomeRulerProductions"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
