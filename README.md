@@ -1,38 +1,44 @@
-# ShipFast — Typescript
+# Home Ruler Productions
 
-Hey maker 👋 it's Marc from [ShipFast](https://shipfa.st/docs). Let's get your startup off the ground, FAST ⚡️
+Professional videography and film production portfolio site.
 
-<sub>**Watch/Star the repo to be notified when updates are pushed**</sub>
+## Tech Stack
 
-## Get Started
+- **Next.js 15.4+** with App Router
+- **React 19**
+- **TypeScript 5.9+**
+- **Tailwind CSS 4.1+**
+- **DaisyUI 5.0+**
+- **Supabase** for authentication and database
 
-1. Follow the [Get Started Tutorial](https://shipfa.st/docs) to clone the repo and run your local server 💻
+## Getting Started
 
-<sub>**Looking for the /pages router version?** Use this [documentation](https://shipfa.st/docs-old) instead</sub>
+1. Install dependencies:
+```bash
+npm install
+```
 
-2. Follow the [Ship In 5 Minutes Tutorial](https://shipfa.st/docs/tutorials/ship-in-5-minutes) to learn the foundation and ship your app quickly ⚡️
+2. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
 
-## Links
+3. Run the development server:
+```bash
+npm run dev
+```
 
--   [📚 Documentation](https://shipfa.st/docs)
--   [📣 Updates](https://shipfast.beehiiv.com/)
--   [🧑‍💻 Discord](https://shipfa.st/dashboard)
--   [🥇 Leaderboard](https://shipfa.st/leaderboard)
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Support
+## Project Structure
 
-Reach out at hello@shipfa.st
+```
+app/           # Next.js app router pages
+components/    # Reusable React components
+libs/          # Utility libraries
+public/        # Static assets
+```
 
-Let's ship it, FAST ⚡️
+## Contact
 
-\_
-
-**📈 Grow your startup with [DataFast](https://datafa.st?ref=shipfast_readme)**
-
--   Analyze your traffic
--   Get insights on your customers
--   Make data-driven decisions
-
-ShipFast members get 30% OFF on all plans! 🎁
-
-![datafast](https://github.com/user-attachments/assets/2a9710f8-9a39-4593-b4bf-9ee933529870)
+For inquiries, reach out at contact@homerulerproductions.com
