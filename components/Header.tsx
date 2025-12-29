@@ -1,12 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import type { JSX } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import ButtonSignin from "./ButtonSignin";
-import logo from "@/app/icon.png";
 import config from "@/config";
 
 const links: {
@@ -14,58 +10,46 @@ const links: {
   label: string;
 }[] = [
   {
-    href: "/#pricing",
-    label: "Pricing",
+    href: "/work",
+    label: "Work",
   },
   {
-    href: "/#testimonials",
-    label: "Reviews",
+    href: "/about",
+    label: "About",
   },
   {
-    href: "/#faq",
-    label: "FAQ",
+    href: "/contact",
+    label: "Contact",
   },
 ];
 
-const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
-
-// A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
-// The header is responsive, and on mobile, the links are hidden behind a burger button.
-const Header = () => {
-  const searchParams = useSearchParams();
+// Inner component that uses useSearchParams
+const HeaderContent = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // setIsOpen(false) when the route changes (i.e: when the user clicks on a link on mobile)
   useEffect(() => {
     setIsOpen(false);
-  }, [searchParams]);
+  }, [pathname]);
 
   return (
-    <header className="bg-base-200">
+    <header className="bg-base-100 border-b border-base-200">
       <nav
-        className="container flex items-center justify-between px-8 py-4 mx-auto"
+        className="max-w-6xl flex items-center justify-between px-8 py-6 mx-auto"
         aria-label="Global"
       >
-        {/* Your logo/name on large screens */}
-        <div className="flex lg:flex-1">
+        {/* Logo/name */}
+        <div className="flex-1">
           <Link
-            className="flex items-center gap-2 shrink-0 "
+            className="font-bold text-xl tracking-tight uppercase"
             href="/"
             title={`${config.appName} homepage`}
           >
-            <Image
-              src={logo}
-              alt={`${config.appName} logo`}
-              className="w-8"
-              placeholder="blur"
-              priority={true}
-              width={32}
-              height={32}
-            />
-            <span className="font-extrabold text-lg">{config.appName}</span>
+            {config.appName}
           </Link>
         </div>
-        {/* Burger button to open menu on mobile */}
+
+        {/* Burger button for mobile */}
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -90,46 +74,33 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Your links on large screens */}
-        <div className="hidden lg:flex lg:justify-center lg:gap-12 lg:items-center">
+        {/* Links on large screens */}
+        <div className="hidden lg:flex lg:gap-8 lg:items-center">
           {links.map((link) => (
             <Link
               href={link.href}
               key={link.href}
-              className="link link-hover"
+              className="text-sm uppercase tracking-wide hover:text-primary transition-colors"
               title={link.label}
             >
               {link.label}
             </Link>
           ))}
         </div>
-
-        {/* CTA on large screens */}
-        <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div>
       </nav>
 
-      {/* Mobile menu, show/hide based on menu state. */}
+      {/* Mobile menu */}
       <div className={`relative z-50 ${isOpen ? "" : "hidden"}`}>
         <div
-          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-4 overflow-y-auto bg-base-200 sm:max-w-sm sm:ring-1 sm:ring-neutral/10 transform origin-right transition ease-in-out duration-300`}
+          className={`fixed inset-y-0 right-0 z-10 w-full px-8 py-6 overflow-y-auto bg-base-100 sm:max-w-sm sm:ring-1 sm:ring-neutral/10 transform origin-right transition ease-in-out duration-300`}
         >
-          {/* Your logo/name on small screens */}
           <div className="flex items-center justify-between">
             <Link
-              className="flex items-center gap-2 shrink-0 "
+              className="font-bold text-xl tracking-tight uppercase"
               title={`${config.appName} homepage`}
               href="/"
             >
-              <Image
-                src={logo}
-                alt={`${config.appName} logo`}
-                className="w-8"
-                placeholder="blur"
-                priority={true}
-                width={32}
-                height={32}
-              />
-              <span className="font-extrabold text-lg">{config.appName}</span>
+              {config.appName}
             </Link>
             <button
               type="button"
@@ -154,29 +125,42 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Your links on small screens */}
-          <div className="flow-root mt-6">
-            <div className="py-4">
-              <div className="flex flex-col gap-y-4 items-start">
-                {links.map((link) => (
-                  <Link
-                    href={link.href}
-                    key={link.href}
-                    className="link link-hover"
-                    title={link.label}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+          <div className="flow-root mt-8">
+            <div className="flex flex-col gap-y-6 items-start">
+              {links.map((link) => (
+                <Link
+                  href={link.href}
+                  key={link.href}
+                  className="text-lg uppercase tracking-wide hover:text-primary transition-colors"
+                  title={link.label}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-            <div className="divider"></div>
-            {/* Your CTA on small screens */}
-            <div className="flex flex-col">{cta}</div>
           </div>
         </div>
       </div>
     </header>
+  );
+};
+
+// Wrapper component with Suspense
+const Header = () => {
+  return (
+    <Suspense fallback={
+      <header className="bg-base-100 border-b border-base-200">
+        <nav className="max-w-6xl flex items-center justify-between px-8 py-6 mx-auto">
+          <div className="flex-1">
+            <span className="font-bold text-xl tracking-tight uppercase">
+              {config.appName}
+            </span>
+          </div>
+        </nav>
+      </header>
+    }>
+      <HeaderContent />
+    </Suspense>
   );
 };
 
