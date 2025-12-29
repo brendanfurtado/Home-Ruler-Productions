@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
       <Header />
-      <main className="min-h-[70vh] flex flex-col items-center justify-center px-8">
+      <main className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
             {config.appName}
